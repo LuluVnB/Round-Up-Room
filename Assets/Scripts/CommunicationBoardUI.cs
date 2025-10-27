@@ -41,4 +41,10 @@ public class CommunicationBoardUI : MonoBehaviour {
         }
         built = true;
     }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.P)) Show(true);
+        if (Input.GetKeyDown(KeyCode.O)) Show(false);
+    }
+
 }
