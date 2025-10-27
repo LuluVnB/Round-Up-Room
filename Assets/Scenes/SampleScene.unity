@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70219cd7f0624a648a5604b66698a1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickUp
-  itemButton: {fileID: 0}
+  itemButton: {fileID: 1170830677}
 --- !u!58 &250220145
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2173,6 +2173,12 @@ MonoBehaviour:
   isFull: 
   slots:
   - {fileID: 1170830677}
+  - {fileID: 1065441551}
+  - {fileID: 523267614}
+  - {fileID: 423191493}
+  - {fileID: 1076066381}
+  - {fileID: 1880428887}
+  - {fileID: 1720316118}
 --- !u!1 &1488215934
 GameObject:
   m_ObjectHideFlags: 0

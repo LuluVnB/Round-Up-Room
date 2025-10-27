@@ -1,15 +1,22 @@
 using UnityEngine;
 
 public class Inventory : MonoBehaviour {
-    [Tooltip("Mark true when a slot is filled.")]
     public bool[] isFull;
-
-    [Tooltip("UI slot objects (same length as isFull).")]
     public GameObject[] slots;
 
+    private void Awake() {
+        EnsureSize();
+    }
+
+#if UNITY_EDITOR
     private void OnValidate() {
-        if (slots != null && isFull != null && slots.Length != isFull.Length) {
-            Debug.LogWarning("Inventory: 'slots' and 'isFull' must be the same length.");
-        }
+        EnsureSize();
+    }
+#endif
+
+    private void EnsureSize() {
+        if (slots == null) return;
+        if (isFull == null || isFull.Length != slots.Length)
+            isFull = new bool[slots.Length];
     }
 }
