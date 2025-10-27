@@ -27,7 +27,7 @@ public class Inventory : MonoBehaviour {
         return c;
     }
 
-    //returns how many items were removed.
+    //this returns how many items were removed.
     public int ClearAll() {
         if (slots == null || isFull == null) return 0;
 
@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour {
         for (int i = 0; i < slots.Length; i++) {
             if (!isFull[i]) continue;
 
-            //removes any UI item(s) parented to the slot
+            //removes any UI items parented to the slot
             var t = slots[i].transform;
             for (int k = t.childCount - 1; k >= 0; k--)
                 GameObject.Destroy(t.GetChild(k).gameObject);

@@ -100,6 +100,5 @@ public class HamperDepositImage : MonoBehaviour {
 
         if (promptImage) promptImage.SetActive(false);
 
-        // TODO: SFX/animation
     }
 }

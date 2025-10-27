@@ -28,7 +28,7 @@ public class CameraFollow2D : MonoBehaviour {
         Vector3 desired = target.position + offset;
 
         if (worldBounds != null) {
-            // Camera half extents in world units
+            //camera half extents in world units
             float halfHeight = _cam.orthographicSize;
             float halfWidth = halfHeight * _cam.aspect;
 

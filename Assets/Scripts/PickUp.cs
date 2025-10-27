@@ -2,56 +2,69 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class PickUp : MonoBehaviour {
-    public GameObject itemButton; //assign in Inspector, must use a UI object with RectTransform or it won't work
+    public GameObject itemButton;             //UI item prefab
+    [Header("Feedback")]
+    public ParticleSystem sparkleFX;          
+    public ParticleSystem confettiFX;         
+    public AudioClip pickupSFX;               
+    [Range(0f, 1f)] public float sfxVolume = 0.9f;
+    public Vector2 fxOffset = new Vector2(0f, 0.1f); //slight lift from floor
 
-    private void Reset() {
-
+    void Reset() {
         var c = GetComponent<Collider2D>();
-        if (c != null) c.isTrigger = true;
+        if (c) c.isTrigger = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    void OnTriggerEnter2D(Collider2D other) {
         if (!other.CompareTag("Player")) return;
 
         var inventory = other.GetComponent<Inventory>();
-        if (inventory == null) {
-            Debug.LogWarning("Player has no Inventory component.");
-            return;
-        }
-
-        if (itemButton == null) {
-            Debug.LogWarning("PickUp: Item Button prefab not assigned.");
-            return;
-        }
+        if (inventory == null) return;
 
         for (int i = 0; i < inventory.slots.Length; i++) {
             if (!inventory.isFull[i]) {
+                //added to inventory UI
                 inventory.isFull[i] = true;
+                Instantiate(itemButton, inventory.slots[i].transform);
 
-                //parent UI item to the slot
-                Transform parent = inventory.slots[i].transform;
-                GameObject go = Instantiate(itemButton, parent, false);
+                
+                PlayPickupFeedback();
 
-                //it's proper UI and fits the slot
-                var rt = go.GetComponent<RectTransform>();
-                if (rt != null) {
-                    rt.anchorMin = Vector2.zero;
-                    rt.anchorMax = Vector2.one;
-                    rt.offsetMin = Vector2.zero;   //left/bottom
-                    rt.offsetMax = Vector2.zero;   //right/top
-                    rt.anchoredPosition = Vector2.zero;
-                    rt.localScale = Vector3.one;
-                    go.transform.SetAsLastSibling(); //on top
-                } else {
-                    Debug.LogWarning("ItemButton prefab must be a UI object with RectTransform.");
-                }
+                
+                var col = GetComponent<Collider2D>();
+                if (col) col.enabled = false;
+                var sr = GetComponent<SpriteRenderer>();
+                if (sr) sr.enabled = false;
 
-                Destroy(gameObject);
+                Destroy(gameObject); //this will remove the floor item
                 return;
             }
         }
+    }
+
+    void PlayPickupFeedback() {
+        Vector3 pos = transform.position + (Vector3)fxOffset;
+
+        
+        if (pickupSFX) AudioSource.PlayClipAtPoint(pickupSFX, pos, sfxVolume);
+
+        // Sparkle
+        if (sparkleFX) {
+            var s = Instantiate(sparkleFX, pos, Quaternion.identity);
+            AutoDestroyParticles(s);
+        }
 
 
-        Debug.Log("Inventory full.");
+    }
+
+    void AutoDestroyParticles(ParticleSystem ps) {
+        var main = ps.main;
+        float extra = 0.5f; 
+        float life =
+            main.duration +
+            (main.startLifetime.mode == ParticleSystemCurveMode.TwoConstants
+                ? main.startLifetime.constantMax
+                : main.startLifetime.constant);
+        Destroy(ps.gameObject, life + extra);
     }
 }
