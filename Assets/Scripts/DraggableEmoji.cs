@@ -22,22 +22,18 @@ public class DraggableEmoji : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
 
     void Start() {
-        // Store original position and parent at start
         originalPosition = rectTransform.anchoredPosition;
         originalParent = transform.parent;
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
-        // Make semi-transparent while dragging
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
 
-        // Move to root canvas so it appears on top
         transform.SetParent(canvas.transform);
     }
 
     public void OnDrag(PointerEventData eventData) {
-        // Move the emoji with the mouse/finger
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
@@ -45,18 +41,18 @@ public class DraggableEmoji : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
-        // Check if dropped on a valid slot
+        //to check if dropped on a valid slot
         bool droppedOnSlot = false;
 
         if (eventData.pointerEnter != null) {
             DropSlot slot = eventData.pointerEnter.GetComponent<DropSlot>();
             if (slot != null && slot.slotCategory == emojiCategory) {
                 droppedOnSlot = true;
-                // Don't return to original position, stay in slot
+                //don't return to original position, stay in slot
             }
         }
 
-        // If not dropped on valid slot, return to original position
+        //if not dropped on valid slot, return to original position
         if (!droppedOnSlot) {
             transform.SetParent(originalParent);
             rectTransform.anchoredPosition = originalPosition;

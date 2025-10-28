@@ -36,7 +36,7 @@ public class MiniGameManager : MonoBehaviour {
         correctPlacements++;
         UpdateScoreUI();
 
-        // Check if game is complete
+        //if statement to check if game is complete
         if (correctPlacements >= totalEmojis) {
             GameComplete();
         }
@@ -63,7 +63,7 @@ public class MiniGameManager : MonoBehaviour {
             completionPanel.SetActive(false);
         }
 
-        // Reset all emojis to original positions
+        //reset all emojis to original positions
         foreach (DraggableEmoji emoji in allEmojis) {
             if (emoji != null) {
                 emoji.ResetPosition();
