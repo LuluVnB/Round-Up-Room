@@ -1079,7 +1079,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.021706581, y: 0.6102965}
+  m_Offset: {x: 0.021706581, y: 0.5841888}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1089,7 +1089,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 8.119673, y: 2.6681442}
+  m_Size: {x: 8.119673, y: 2.7203596}
   m_EdgeRadius: 0
 --- !u!212 &646100570
 SpriteRenderer:
@@ -1176,8 +1176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5648f7931112b8d40a871c42642cadfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoardTrigger
-  boardUI: {fileID: 0}
-  targetTag: Player
 --- !u!1 &754458536
 GameObject:
   m_ObjectHideFlags: 0
@@ -3608,20 +3606,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e7de839aca80b428b87ec23cb7b3ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CommunicationBoardUI
-  panel: {fileID: 0}
-  wordTray: {fileID: 0}
-  boardArea: {fileID: 0}
-  wordPrefab: {fileID: 4902062708062452529, guid: 7507a27a13a209144a8d8f51fce50a4d, type: 3}
-  words:
-  - AIDET
-  - Plan of care
-  - Toileting schedule
-  - Rounding schedule
-  - 4Ps
-  - Mobilization equipment
-  - Name
-  - Phone number
-  built: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
