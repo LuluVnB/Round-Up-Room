@@ -13,7 +13,7 @@ public class MiniGameManager : MonoBehaviour {
 
     private int score = 0;
     private int correctPlacements = 0;
-    private int totalEmojis = 6;
+    private int totalEmojis = 5;
 
     void Start() {
         UpdateScoreUI();
